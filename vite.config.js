@@ -1,8 +1,22 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/kavirasu",
+  server: {
+    open: true,
+  },
+  base: "/",
+  build: {
+    outDir: "dist",
+  },
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
+  // 👇 This fixes the 404 issue on refresh
+  esbuild: {
+    jsxInject: `import React from 'react'`,
+  },
 });
